@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Function to display the countdown timer
+countdown() {
+    local SECONDS=$1
+    while [ $SECONDS -gt 0 ]; do
+        # Calculate minutes and seconds
+        local MINUTES=$(($SECONDS / 60))
+        local SECONDS_DISPLAY=$(($SECONDS % 60))
+
+        # Format the time
+        printf -v TIME_DISPLAY "%02d:%02d" $MINUTES $SECONDS_DISPLAY
+
+        # Clear the screen
+        clear
+
+        # Display the time in large text
+        figlet "$TIME_DISPLAY"
+
+        # Wait for 1 second
+        sleep 1
+
+        # Decrement the time
+        ((SECONDS--))
+    done
+
+    # Time's up message
+    clear
+    figlet "TIME'S UP!"
+}
+
+# Start the countdown for 90 minutes (5400 seconds)
+countdown 5400
